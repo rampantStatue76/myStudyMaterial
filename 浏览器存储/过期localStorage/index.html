@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ExpireStorage = {
+            set(key, value, expire) {
+                const data = {
+                    value: value,
+                    expire: expire ? Date.now() + expire : null
+                };
+                localStorage.setItem(key, JSON.stringify(data));
+            },
+
+            get(key) {
+                const str = localStorage.getItem(key);
+                if (!str) return null;
+
+                try {
+                    const obj = JSON.parse(str);
+                    // 没有设置过期时间
+                    if (!obj.expire) return obj.value;
+
+                    // 检查是否过期
+                    if (Date.now() > obj.expire) {
+                        localStorage.removeItem(key);
+                        return null;
+                }
+                return obj.value;
+                } catch (e) {
+                return null;
+                }
+            },
+
+            remove(key) {
+                localStorage.removeItem(key);
+            }
+        };
+
+        // 使用示例
+        ExpireStorage.set("userInfo", { name: "Alice" }, 2000);
+        
+        console.log('----两秒前获取----')
+        console.log(ExpireStorage.get("userInfo"))
+        
+        console.log('----两秒后再次获取----')
+        setTimeout(() => {
+            console.log(ExpireStorage.get("userInfo")); // 2 秒后输出 null
+        }, 3000);
+    </script>
+</body>
+</html>

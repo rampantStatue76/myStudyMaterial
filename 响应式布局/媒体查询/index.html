@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应式网格布局</title>
+</head>
+<body>
+  <div class="container">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+    }
+
+    /* 选择容器下的所有直接子元素 */
+    .container > * {
+      background-color: greenyellow;
+      width: 300px;
+      height: 100px;
+    }
+
+    /* 媒体查询：屏幕宽度小于1000px时的样式 */
+    @media screen and (max-width: 1000px) {
+      .container > * {
+        background-color: rebeccapurple;
+        color: white;
+      }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="debounce-btn">防抖按钮</button>
+    <button id="throttle-btn">节流按钮</button>
+    <script>
+        const debounceBtn = document.querySelector('#debounce-btn')
+        const throttleBtn = document.querySelector('#throttle-btn')
+        
+
+        // 防抖函数
+        function debounce(fn, delay){
+            let timer = null
+            return function(...args){
+                if(timer) clearTimeout(timer)
+                timer = setTimeout(()=>{
+                    fn.apply(this, args)
+                },delay)
+            }
+        }
+        // 节流函数
+        function throttle(fn, delay){
+            let canRun = true
+            return function(...args){
+                if(!canRun) return
+                canRun = false
+                setTimeout(()=>{
+                    fn.apply(this, args)
+                    canRun = true
+                },delay)
+            }
+        }
+        const debouceClick = debounce(() => {
+            console.log('nihao1');
+        },1000)
+        const throttleClick = throttle(() => {
+            console.log('nihao2');
+        },1000)
+        debounceBtn.addEventListener('click',debouceClick)
+        throttleBtn.addEventListener('click',throttleClick)
+    </script>
+</body>
+</html>

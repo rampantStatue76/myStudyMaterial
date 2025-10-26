@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数柯里化</title>
+</head>
+<body>
+    <script>
+        //概念：是指将一个接受多个参数的函数，转换成一系列使用一个参数的函数的过程
+        //通过函数柯里化可以实现参数的复用
+
+        // 0.基础概念
+        // 普通函数
+        // function add(a, b, c) {
+        //     return a + b + c;
+        // }
+        // // 柯里化后的函数
+        // function curriedAdd(a) {
+        //     return function(b) {
+        //         return function(c) {
+        //             return a + b + c;
+        //         }
+        //     }
+        // }
+        // // 使用方式对比
+        // add(1, 2, 3);        // 6
+        // curriedAdd(1)(2)(3); // 6
+
+
+        // 需求1：
+        // add(1)(2)(3) = 6 
+        // add(1,2,3) = 6
+        // let arr = []
+        // function add(){
+        //     arr.push(...Array.prototype.slice.call(arguments));
+        //     if(arr.length >= 3){
+        //         const sum = arr.slice(0,3).reduce((ac,cur) => ac + cur,0)
+        //         arr = []
+        //         return sum
+        //     }else{
+        //         return add
+        //     }
+        // }
+
+        
+        // 需求2：
+        // 实现任意个参数任意组合求和
+        // function addPlus(len){
+        //     let arr = []
+        //     return function add(...args){
+        //         arr.push(...args)
+        //         if(arr.length >= len){
+        //             let sum = arr.slice(0,len).reduce((ac,cu)=> ac+cu,0)
+        //             arr = []
+        //             return sum
+        //         }else{
+        //             return add
+        //         }
+        //     }
+        // }
+        
+
+        // 需求3
+        // 类型判断
+        // const typeofTest = function(type){
+        //     return function isUndefined(thing){
+        //         return typeof thing === type
+        //     }
+        // }
+        // const isString = typeofTest('string')
+        // console.log(isString('123')); // true
+    </script>
+</body>
+</html>
